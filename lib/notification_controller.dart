@@ -36,6 +36,8 @@ class NotificationController {
   Future<void> initialize() async {
     await _requestPermission();
 
+    print('FCM token: ${await messaging.getToken()}');
+
     // 푸시 알림 리스너 설정
     FirebaseMessaging.onMessage.listen(_foregroundHandler);
     FirebaseMessaging.onBackgroundMessage(_backgroundHandler);
@@ -68,7 +70,7 @@ class NotificationController {
             NotificationController._channel.id, // 채널 정보
             NotificationController._channel.name,
             channelDescription: NotificationController._channel.description,
-            icon: '@mipmap/launcher_icon',
+            icon: '@mipmap/ic_launcher',
           ),
         ),
         payload: payload ?? "", // 경로 전달
